@@ -1,0 +1,19 @@
+Cara Penggunaan Aplikasi
+1. Import Database pengaduan_ujikom.sql
+2. Masuk Ke Directori File yang Di Download
+3. Configurasikan .env
+4. composer update
+
+Akun Aplikasi Admin & Petugas
+
+(ADMIN)
+admin@admin.com -email
+adminadmin	-password
+
+(PETUGAS)
+petugas@anwar.com -email
+adminadmin	-password
+
+(MASYARAKAT)
+imamfirmansyah724@gmail.com
+imamimam
