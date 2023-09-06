@@ -130,11 +130,11 @@
                             </p>
                             <p class="text-center font-weight-bold">“Berani Beda Itu Baik !!”</p>
                         </div>
-                        <div class="row w-100">
-                            <div class="col-lg-6 my-4">
+                        <div class="row w-100 ">
+                            <div class="col-lg-8 my-4">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15831.82225414984!2d112.5833701!3d-7.2458976!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7800e57c76e355%3A0x9e56bbbb82bd5450!2sMulia%20Grand%20Manufacture!5e0!3m2!1sid!2sid!4v1694039929745!5m2!1sid!2sid" class="w-100" height="500" allowfullscreen="" loading="lazy"></iframe>
                             </div>
-                            <div class="col-lg-6 my-4 d-flex align-items-center">
+                            <div class="col-lg-4 my-4 d-flex align-items-center">
                                 <div>
                                     <h4>Lokasi Kami</h4>
                                     <p>Jl. Raya Boboh No.89, RT. 05/RW 03, Desa Boboh Kec. Menganti, Kabupaten Gresik, Jawa Timur 61174</p><br>
