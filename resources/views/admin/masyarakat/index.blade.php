@@ -3,7 +3,7 @@
 
 <body>
     <!-- Left Panel -->
-     <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -14,7 +14,7 @@
                     <li class="menu-title">KELOLA DATA</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Pengumuman</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-tags"></i><a href="{{url('admin/pengumuman')}}">Tampilkan</a></li>
                             <li><i class="fa fa-pencil-square-o"></i><a href="{{url('admin/pengumuman/create')}}">Buat Pengumuman</a></li>
                         </ul>
@@ -24,7 +24,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pengaduan</a>
                         <ul class="sub-menu children dropdown-menu ">
                             <li><i class="fa fa-table "></i><a href="{{url('admin/pengaduan')}}">Tampilkan</a></li>
-                            
+
 
                         </ul>
                     </li>
@@ -43,7 +43,7 @@
                             <li><i class="menu-icon fa fa-unlock-alt"></i><a href="{{route('user.showing',auth()->user()->id)}}">Edit Profile</a></li>
                         </ul>
                     </li>
-                     <li class="menu-item-has-children dropdown active">
+                    <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Masyarakat</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Masyarakat</a></li>
@@ -52,7 +52,7 @@
                     <li class="menu-title">Laporan</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Laporan</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-rotate-right"></i><a href="{{url('admin/laporan')}}">Buat Laporan</a></li>
                         </ul>
                     </li>
@@ -88,19 +88,18 @@
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{route('user.show',auth()->user()->id)}}"><i class="fa fa- user"></i>My Profile</a>
 
-                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">{{$jmlh_belum}}</span></a>
 
                             <a class="nav-link" href="{{route('user.showing',auth()->user()->id)}}"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
-                                    <i class="fa "></i>
+                                <i class="fa "></i>
                                 {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                @csrf
                             </form>
                         </div>
                     </div>
@@ -140,27 +139,27 @@
                     <div class="col-lg-12">
                         <div class="card">
                             @if($message = Session::get('destroy'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  <strong>Success!</strong> {{$message}}
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                @elseif($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <strong>Success!</strong> {{$message}}
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                </button>
+                            </div>
+                            @elseif($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                @elseif($message = Session::get('warning'))
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                  <strong>Success!</strong> {{$message}}
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                </button>
+                            </div>
+                            @elseif($message = Session::get('warning'))
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                              @endif
+                                </button>
+                            </div>
+                            @endif
                             <div class="card-header">
                                 <strong class="card-title">All User</strong>
                             </div>
@@ -190,33 +189,33 @@
                                             <td class="text-lowercase">{{$user->email}} </td>
                                             <td class="text-center"> <span class="badge badge-warning font-weight-bold">Masyarakat</span> </td>
                                             <td class="text-center"><span>
-                                                <form action="{{route('user.destroy',$user->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
-                                                <a href="{{route('masyarakat.showing',$user->id)}}" class="btn fa fa-eye"></a>
-                                                <a href="{{route('masyarakat.edit',$user->id)}}"  class="btn btn-primary fa fa-edit"></a> 
-                                            </form>
-                                            </span></td>
+                                                    <form action="{{route('user.destroy',$user->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
+                                                        <a href="{{route('masyarakat.showing',$user->id)}}" class="btn fa fa-eye"></a>
+                                                        <a href="{{route('masyarakat.edit',$user->id)}}" class="btn btn-primary fa fa-edit"></a>
+                                                    </form>
+                                                </span></td>
                                         </tr>
                                         @endif
                                         @endforeach
-                                       
 
-                                        
+
+
                                     </tbody>
                                 </table>
                             </div> <!-- /.table-stats -->
                         </div>
                     </div>
                 </div>
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content -->
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
 
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-@endsection
+    @endsection

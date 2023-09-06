@@ -18,8 +18,9 @@ class LaporanController extends Controller
      */
     public function index()
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduan = Tanggapan::all();
-        return view('admin/laporan/index', compact('pengaduan'));
+        return view('admin/laporan/index', compact('pengaduan', 'jmlh_belum'));
     }
 
     /**
@@ -91,8 +92,8 @@ class LaporanController extends Controller
     {
         $tanggapan = Tanggapan::all();
 
-        $pdf = PDF::loadView('pengaduan_pdf',compact('tanggapan'))->setPaper('a4', 'landscape');
-        $pdf->save(storage_path().'_filename.pdf');
+        $pdf = PDF::loadView('pengaduan_pdf', compact('tanggapan'))->setPaper('a4', 'landscape');
+        $pdf->save(storage_path() . '_filename.pdf');
         return $pdf->stream();
     }
     // public function cetak_pdf()

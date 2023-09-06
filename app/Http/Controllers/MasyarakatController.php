@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pengaduan;
 use App\User;
 use App\Masyarakat;
 use App\Profile;
@@ -25,9 +26,10 @@ class MasyarakatController extends Controller
     }
     public function index()
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $users = User::first()->paginate(10);
-        return view('admin.masyarakat.index', compact('users'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('admin.masyarakat.index', compact('users', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -83,24 +85,24 @@ class MasyarakatController extends Controller
     public function update(Request $request, Masyarakat $user)
     {
         $fotoLama = $request->fotoLama;
+        $foto = $request->file('foto');
+        if (!empty($foto)) {
             $foto = $request->file('foto');
-            if(!empty($foto)){
-                $foto = $request->file('foto');
-                $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
-                $foto->move(public_path('upload/'),$namaBaru);
-            }else{
-                $foto = $fotoLama;
-                $namaBaru = $foto;
-            }
+            $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
+            $foto->move(public_path('upload/'), $namaBaru);
+        } else {
+            $foto = $fotoLama;
+            $namaBaru = $foto;
+        }
 
-               Profile::whereId($user->id)->update([
-                "nik"     => $request->nike,
-                "name"     => $request->name,
-                "telp"     => $request->telp,
-                'email'     => $request->email,
-                "foto"        => $namaBaru,
-                ]);  
-       return redirect ('admin/masyarakat')->with('success','Data Has Been Update');
+        Profile::whereId($user->id)->update([
+            "nik"     => $request->nike,
+            "name"     => $request->name,
+            "telp"     => $request->telp,
+            'email'     => $request->email,
+            "foto"        => $namaBaru,
+        ]);
+        return redirect('admin/masyarakat')->with('success', 'Data Has Been Update');
     }
 
     /**
@@ -113,14 +115,17 @@ class MasyarakatController extends Controller
     {
         $user->delete();
         return back()
-                ->with('destroy','1 User Telah Di Hapus.');
+            ->with('destroy', '1 User Telah Di Hapus.');
     }
-    public function showing($id){
+    public function showing($id)
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $user = \App\User::find($id);
-        return view('admin.masyarakat.show',compact('user'));  
+        return view('admin.masyarakat.show', compact('user', 'jmlh_belum'));
     }
-     public function profile($id){
+    public function profile($id)
+    {
         $user = \App\Masyarakat::find($id);
-        return view('admin.masyarakat.ubah-masyarakat',compact('user'));  
+        return view('admin.masyarakat.ubah-masyarakat', compact('user'));
     }
 }

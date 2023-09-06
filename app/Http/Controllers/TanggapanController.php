@@ -21,10 +21,11 @@ class TanggapanController extends Controller
         $this->middleware('auth');
     }
     public function index()
-    {   
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduans = Pengaduan::latest()->paginate(20);
-        return view('admin.pengaduan.index',compact('pengaduans'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('admin.pengaduan.index', compact('pengaduans', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -56,7 +57,8 @@ class TanggapanController extends Controller
      */
     public function show(Pengaduan $pengaduan)
     {
-        return view('admin/pengaduan/show',compact('pengaduan'));
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
+        return view('admin/pengaduan/show', compact('pengaduan', 'jmlh_belum'));
     }
 
     /**
@@ -79,7 +81,7 @@ class TanggapanController extends Controller
      */
     public function update(Request $request, Pengaduan $pengaduan)
     {
-            Pengaduan::whereId($pengaduan->id)->update([
+        Pengaduan::whereId($pengaduan->id)->update([
             'cover' => $request->cover,
             'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
@@ -87,10 +89,10 @@ class TanggapanController extends Controller
             'nik' => $request->nik,
             'status' => $request->status,
             'kategori' => $request->kategori,
-            'id_petugas' =>$request->id_petugas,
+            'id_petugas' => $request->id_petugas,
             'foto' => $request->foto,
-       ]);
-        return redirect ('admin/pengaduan')->with('success','Data Has Been Saved');
+        ]);
+        return redirect('admin/pengaduan')->with('success', 'Data Has Been Saved');
     }
 
     /**
@@ -103,25 +105,25 @@ class TanggapanController extends Controller
     {
         $pengaduan->delete();
         return back()
-                ->with('destroy','1 Pengaduan Telah Di Hapus.');
+            ->with('destroy', '1 Pengaduan Telah Di Hapus.');
     }
-    public function showing($id){
+    public function showing($id)
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduan = \App\Pengaduan::find($id);
-        return view('admin.pengaduan.show',compact('pengaduan'));  
+        return view('admin.pengaduan.show', compact('pengaduan', 'jmlh_belum'));
     }
     public function cari(Request $request)
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         // menangkap data pencarian
         $cari = $request->cari;
 
         $pengaduans = DB::table('pengaduan')
-        ->where('judul','like',"%".$cari."%")
-        ->paginate();
- 
-            // mengirim data pegawai ke view index
-        return view('admin.pengaduan.index',compact('pengaduans'));
+            ->where('judul', 'like', "%" . $cari . "%")
+            ->paginate();
 
- 
+        // mengirim data pegawai ke view index
+        return view('admin.pengaduan.index', compact('pengaduans', 'jml_belum'));
     }
-    
 }

@@ -2,18 +2,19 @@
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     });
-  });
-});
 </script>
+
 <body>
     <!-- Left Panel -->
-     <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -24,7 +25,7 @@ $(document).ready(function(){
                     <li class="menu-title">KELOLA DATA</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Pengumuman</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-tags"></i><a href="{{url('admin/pengumuman')}}">Tampilkan</a></li>
                             <li><i class="fa fa-pencil-square-o"></i><a href="{{url('admin/pengumuman/create')}}">Buat Pengumuman</a></li>
                         </ul>
@@ -34,7 +35,7 @@ $(document).ready(function(){
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pengaduan</a>
                         <ul class="sub-menu children dropdown-menu ">
                             <li><i class="fa fa-table "></i><a href="{{url('admin/pengaduan')}}">Tampilkan</a></li>
-                            
+
 
                         </ul>
                     </li>
@@ -53,7 +54,7 @@ $(document).ready(function(){
                             <li><i class="menu-icon fa fa-unlock-alt"></i><a href="{{route('user.showing',auth()->user()->id)}}">Edit Profile</a></li>
                         </ul>
                     </li>
-                     <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Masyarakat</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Masyarakat</a></li>
@@ -62,7 +63,7 @@ $(document).ready(function(){
                     <li class="menu-title">Laporan</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Laporan</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-rotate-right"></i><a href="{{url('admin/laporan')}}">Buat Laporan</a></li>
                         </ul>
                     </li>
@@ -98,19 +99,18 @@ $(document).ready(function(){
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{route('user.show',auth()->user()->id)}}"><i class="fa fa- user"></i>My Profile</a>
 
-                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">{{$jmlh_belum}}</span></a>
 
                             <a class="nav-link" href="{{route('user.showing',auth()->user()->id)}}"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
-                                    <i class="fa "></i>
+                                <i class="fa "></i>
                                 {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                @csrf
                             </form>
                         </div>
                     </div>
@@ -150,33 +150,33 @@ $(document).ready(function(){
                     <div class="col-lg-12">
                         <div class="card">
                             @if($message = Session::get('destroy'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  <strong>Success!</strong> {{$message}}
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                @elseif($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <strong>Success!</strong> {{$message}}
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                </button>
+                            </div>
+                            @elseif($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                @elseif($message = Session::get('warning'))
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                  <strong>Success!</strong> {{$message}}
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                </button>
+                            </div>
+                            @elseif($message = Session::get('warning'))
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                              @endif
+                                </button>
+                            </div>
+                            @endif
                             <div class="card-header">
                                 <strong class="card-title">Semua Pengaduan</strong>
                                 <form action="{{route('cari-pengaduan')}}" method="GET">
-                                {{-- <button type="submit"  class="btn btn-sm btn-primary float-right"><i class="fa fa-search"></i></button> --}}
-                               <input type="text" name="cari" id="myInput"  placeholder="Search .." autocomplete="off" class="form-control col-md-2 form-control-sm  float-right">
-                               </form>
+                                    {{-- <button type="submit"  class="btn btn-sm btn-primary float-right"><i class="fa fa-search"></i></button> --}}
+                                    <input type="text" name="cari" id="myInput" placeholder="Search .." autocomplete="off" class="form-control col-md-2 form-control-sm  float-right">
+                                </form>
 
                             </div>
                             <div class="table-stats order-table ov-h">
@@ -191,23 +191,23 @@ $(document).ready(function(){
 
                                         </tr>
                                     </thead>
-                                     
+
                                     <tbody id="myTable">
                                         @foreach($pengaduans as $pengaduan)
                                         @if($pengaduan->status == "verified")
                                         <tr>
                                             <td class="serial">{{++$i}}</td>
-                                            <td>  <span class="name">{{$pengaduan->judul}}</span> </td>
+                                            <td> <span class="name">{{$pengaduan->judul}}</span> </td>
                                             <td class="text-center"> <span class="">{{$pengaduan->created_at->format('d M')}}</span> </td>
-                                            <td class="text-center"><span >
-                                            <form action="{{route('pengaduan.destroy',$pengaduan->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
-                                                <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn fa fa-eye"></a>
-                                                <a href="{{route('tanggapan.showing',$pengaduan->id)}}"  class="btn btn-success fa fa-check-square-o"></a>
-                                            </form>
-                                            </span></td>
+                                            <td class="text-center"><span>
+                                                    <form action="{{route('pengaduan.destroy',$pengaduan->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
+                                                        <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn fa fa-eye"></a>
+                                                        <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn btn-success fa fa-check-square-o"></a>
+                                                    </form>
+                                                </span></td>
                                             <td class="text-center">
                                                 <span class="badge badge-primary">Verified</span>
 
@@ -216,17 +216,17 @@ $(document).ready(function(){
                                         @elseif($pengaduan->status == "proses")
                                         <tr>
                                             <td class="serial">{{++$i}}</td>
-                                            <td>  <span class="name">{{$pengaduan->judul}}</span> </td>
+                                            <td> <span class="name">{{$pengaduan->judul}}</span> </td>
                                             <td class="text-center"> <span class="">{{$pengaduan->created_at->format('d M')}}</span> </td>
-                                            <td class="text-center"><span >
-                                            <form action="{{route('pengaduan.destroy',$pengaduan->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
-                                                <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn fa fa-eye"></a>
-                                                <a href="{{route('tanggapan.showing',$pengaduan->id)}}"  class="btn btn-success fa fa-check-square-o"></a>
-                                            </form>
-                                            </span></td>
+                                            <td class="text-center"><span>
+                                                    <form action="{{route('pengaduan.destroy',$pengaduan->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
+                                                        <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn fa fa-eye"></a>
+                                                        <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn btn-success fa fa-check-square-o"></a>
+                                                    </form>
+                                                </span></td>
                                             <td class="text-center">
                                                 <span class="badge badge-danger">Proses</span>
 
@@ -235,17 +235,17 @@ $(document).ready(function(){
                                         @elseif($pengaduan->status == "selesai")
                                         <tr>
                                             <td class="serial">{{++$i}}</td>
-                                            <td>  <span class="name">{{$pengaduan->judul}}</span> </td>
+                                            <td> <span class="name">{{$pengaduan->judul}}</span> </td>
                                             <td class="text-center"> <span class="">{{$pengaduan->created_at->format('d M')}}</span> </td>
-                                            <td class="text-center"><span >
-                                            <form action="{{route('pengaduan.destroy',$pengaduan->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
-                                                 <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn fa fa-eye"></a>
-                                                <a href="{{route('tanggapan.showing',$pengaduan->id)}}"  class="btn btn-success fa fa-check-square-o"></a>
-                                            </form>
-                                            </span></td>
+                                            <td class="text-center"><span>
+                                                    <form action="{{route('pengaduan.destroy',$pengaduan->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger fa fa-times" onclick="return confirm('Are you sure?')"></button>
+                                                        <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn fa fa-eye"></a>
+                                                        <a href="{{route('tanggapan.showing',$pengaduan->id)}}" class="btn btn-success fa fa-check-square-o"></a>
+                                                    </form>
+                                                </span></td>
                                             <td class="text-center">
                                                 <span class="badge badge-success">Selesai</span>
 
@@ -253,16 +253,16 @@ $(document).ready(function(){
                                         </tr>
                                         @endif
                                         @endforeach
-                                       
-                                          
-                                        
+
+
+
                                     </tbody>
-                                   
+
                                 </table>
-                                   <div class="card-body row">
-                                    <p class="col-md-6"> Jumlah Data : {{ $pengaduans->total() }}  </p>
+                                <div class="card-body row">
+                                    <p class="col-md-6"> Jumlah Data : {{ $pengaduans->total() }} </p>
                                     {{ $pengaduans->links() }}
-                                   </div>
+                                </div>
                             </div> <!-- /.table-stats -->
                         </div>
                     </div>
@@ -271,10 +271,10 @@ $(document).ready(function(){
 
         </div>
     </div><!-- .animated -->
-</div><!-- .content -->
+    </div><!-- .content -->
 
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-@endsection
+    @endsection

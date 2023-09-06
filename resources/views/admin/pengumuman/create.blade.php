@@ -3,7 +3,7 @@
 
 <body>
     <!-- Left Panel -->
-     <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -14,7 +14,7 @@
                     <li class="menu-title">KELOLA DATA</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Pengumuman</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-tags"></i><a href="{{url('admin/pengumuman')}}">Tampilkan</a></li>
                             <li><i class="fa fa-pencil-square-o"></i><a href="{{url('admin/pengumuman/create')}}">Buat Pengumuman</a></li>
                         </ul>
@@ -24,7 +24,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pengaduan</a>
                         <ul class="sub-menu children dropdown-menu ">
                             <li><i class="fa fa-table "></i><a href="{{url('admin/pengaduan')}}">Tampilkan</a></li>
-                            
+
 
                         </ul>
                     </li>
@@ -43,7 +43,7 @@
                             <li><i class="menu-icon fa fa-unlock-alt"></i><a href="{{route('user.showing',auth()->user()->id)}}">Edit Profile</a></li>
                         </ul>
                     </li>
-                     <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Masyarakat</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Masyarakat</a></li>
@@ -52,7 +52,7 @@
                     <li class="menu-title">Laporan</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Laporan</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-rotate-right"></i><a href="{{url('admin/laporan')}}">Buat Laporan</a></li>
                         </ul>
                     </li>
@@ -88,19 +88,18 @@
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{route('user.show',auth()->user()->id)}}"><i class="fa fa- user"></i>My Profile</a>
 
-                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">{{$jmlh_belum}}</span></a>
 
                             <a class="nav-link" href="{{route('user.showing',auth()->user()->id)}}"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
-                                    <i class="fa "></i>
+                                <i class="fa "></i>
                                 {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                @csrf
                             </form>
                         </div>
                     </div>
@@ -136,53 +135,53 @@
 
         <div class="content">
             <div class="animated fadeIn">
-                  
+
                 <div class="row">
-                  
-                        <div class="col-lg-12">
+
+                    <div class="col-lg-12">
                         <form action="{{route('pengumuman.store')}}" method="POST">
-                        @csrf
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Buat Pengumuman</strong>
-                            </div><br>
-                        <div class="card-body">
-                            <div class="form-group">
-                            <label class=" form-control-label ml-1">Judul</label>
-                            <input type="text" class="form-control ml-1" required="" name="judul">
-                        </div>
-                        <div class="">
-                    <style>
-                      #cke_1_contents{
-                        height: 400px!important;
-                      }
-                    </style>
-                        <textarea name="isi" class="ml-3" required="" id="isi" rows="10" cols="80">
-                            
+                            @csrf
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">Buat Pengumuman</strong>
+                                </div><br>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class=" form-control-label ml-1">Judul</label>
+                                        <input type="text" class="form-control ml-1" required="" name="judul">
+                                    </div>
+                                    <div class="">
+                                        <style>
+                                            #cke_1_contents {
+                                                height: 400px !important;
+                                            }
+                                        </style>
+                                        <textarea name="isi" class="ml-3" required="" id="isi" rows="10" cols="80">
+
                         </textarea>
-                        <script>
-                            // Replace the <textarea id="editor1"> with a CKEditor
-                            // instance, using default configuration.
-                            CKEDITOR.replace( 'isi' );
-                        </script>
-                            <br>    
-                        </div>
-                        <div class="">
-                            <input type="text" name="nama" value="{{auth()->user()->name}}" hidden="">
-                            <input type="text" name="level" value="{{auth()->user()->level}}" hidden="">
-                         <button type="submit" class="btn btn-primary ml-1" style="padding-left: 2%;padding-right: 2%;">Save</button><br><br>
-                        </div>
-                        </div>
-                        </div>
-                    </form>
+                                        <script>
+                                            // Replace the <textarea id="editor1"> with a CKEditor
+                                            // instance, using default configuration.
+                                            CKEDITOR.replace('isi');
+                                        </script>
+                                        <br>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" name="nama" value="{{auth()->user()->name}}" hidden="">
+                                        <input type="text" name="level" value="{{auth()->user()->level}}" hidden="">
+                                        <button type="submit" class="btn btn-primary ml-1" style="padding-left: 2%;padding-right: 2%;">Save</button><br><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    
+
                 </div>
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content -->
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
 
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 
-</div><!-- /#right-panel -->
-@endsection
+    </div><!-- /#right-panel -->
+    @endsection

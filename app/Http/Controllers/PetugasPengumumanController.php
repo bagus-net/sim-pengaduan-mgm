@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pengaduan;
 use App\Pengumuman;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,11 @@ class PetugasPengumumanController extends Controller
         $this->middleware('auth');
     }
     public function index()
-    {   
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengumumans = Pengumuman::latest()->paginate(20);
-        return view('petugas.pengumuman.index',compact('pengumumans'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('petugas.pengumuman.index', compact('pengumumans', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -30,7 +32,8 @@ class PetugasPengumumanController extends Controller
      */
     public function create()
     {
-        return view('petugas.pengumuman.create');
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
+        return view('petugas.pengumuman.create', compact('jmlh_belum'));
     }
 
     /**
@@ -50,9 +53,11 @@ class PetugasPengumumanController extends Controller
      * @param  \App\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function showing($id){
+    public function showing($id)
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengumuman = \App\Pengumuman::find($id);
-        return view('petugas.pengumuman.show',compact('pengumuman'));  
+        return view('petugas.pengumuman.show', compact('pengumuman', 'jmlh_belum'));
     }
 
     /**
@@ -63,7 +68,7 @@ class PetugasPengumumanController extends Controller
      */
     public function edit(Pengumuman $pengumuman)
     {
-        return view('petugas.pengumuman.edit',compact('pengumuman'));
+        return view('petugas.pengumuman.edit', compact('pengumuman'));
     }
 
     /**
@@ -80,8 +85,8 @@ class PetugasPengumumanController extends Controller
             'judul' => $request->judul,
             'isi' => $request->isi,
             'level' => $request->level,
-       ]);
-        return redirect ('petugas/pengumuman')->with('warning','Data Telah di ubah.');
+        ]);
+        return redirect('petugas/pengumuman')->with('warning', 'Data Telah di ubah.');
     }
 
     /**
@@ -90,9 +95,10 @@ class PetugasPengumumanController extends Controller
      * @param  \App\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-     public function delete ($id){
+    public function delete($id)
+    {
         $pengumuman = \App\Pengumuman::find($id);
         $pengumuman->delete();
-        return back()->with('destroy','Komentar Berhasil Di Hapus');
+        return back()->with('destroy', 'Komentar Berhasil Di Hapus');
     }
 }

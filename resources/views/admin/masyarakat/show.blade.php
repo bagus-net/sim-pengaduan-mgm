@@ -3,7 +3,7 @@
 
 <body>
     <!-- Left Panel -->
-     <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -14,7 +14,7 @@
                     <li class="menu-title">KELOLA DATA</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Pengumuman</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-tags"></i><a href="{{url('admin/pengumuman')}}">Tampilkan</a></li>
                             <li><i class="fa fa-pencil-square-o"></i><a href="{{url('admin/pengumuman/create')}}">Buat Pengumuman</a></li>
                         </ul>
@@ -24,7 +24,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Pengaduan</a>
                         <ul class="sub-menu children dropdown-menu ">
                             <li><i class="fa fa-table "></i><a href="{{url('admin/pengaduan')}}">Tampilkan</a></li>
-                            
+
 
                         </ul>
                     </li>
@@ -43,7 +43,7 @@
                             <li><i class="menu-icon fa fa-unlock-alt"></i><a href="{{route('user.showing',auth()->user()->id)}}">Edit Profile</a></li>
                         </ul>
                     </li>
-                     <li class="menu-item-has-children dropdown active">
+                    <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Masyarakat</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Masyarakat</a></li>
@@ -52,7 +52,7 @@
                     <li class="menu-title">Laporan</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Laporan</a>
-                        <ul class="sub-menu children dropdown-menu">                            
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-rotate-right"></i><a href="{{url('admin/laporan')}}">Buat Laporan</a></li>
                         </ul>
                     </li>
@@ -88,19 +88,18 @@
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{route('user.show',auth()->user()->id)}}"><i class="fa fa- user"></i>My Profile</a>
 
-                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">{{$jmlh_belum}}</span></a>
 
                             <a class="nav-link" href="{{route('user.showing',auth()->user()->id)}}"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
-                                    <i class="fa "></i>
+                                <i class="fa "></i>
                                 {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                @csrf
                             </form>
                         </div>
                     </div>
@@ -157,7 +156,7 @@
                                         <div class="card-text text-sm-center">
                                             <h5 class="text-sm-center mt-2 mb-1 font-weight-bold">{{$user->nik}}</h5>
                                             <h5 class="text-sm-center mt-2 mb-1">{{$user->telp}}</h5>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -167,11 +166,11 @@
                         </div>
                     </div>
                 </div>
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content -->
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
 
-<div class="clearfix"></div>
-</div><!-- /#right-panel -->
+    <div class="clearfix"></div>
+    </div><!-- /#right-panel -->
 
-@endsection
+    @endsection

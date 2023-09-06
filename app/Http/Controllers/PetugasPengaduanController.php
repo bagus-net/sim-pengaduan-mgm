@@ -22,10 +22,11 @@ class PetugasPengaduanController extends Controller
         $this->middleware('auth');
     }
     public function index()
-    {   
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduans = Pengaduan::latest()->paginate(20);
-        return view('petugas.pengaduan.index',compact('pengaduans'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('petugas.pengaduan.index', compact('pengaduans', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -46,9 +47,11 @@ class PetugasPengaduanController extends Controller
      * @param  \App\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-     public function showing($id){
+    public function showing($id)
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduan = \App\Pengaduan::find($id);
-        return view('petugas.pengaduan.show',compact('pengaduan'));  
+        return view('petugas.pengaduan.show', compact('pengaduan', 'jmlh_belum'));
     }
 
     /**
@@ -69,18 +72,19 @@ class PetugasPengaduanController extends Controller
      * @param  \App\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $pengaduan = \App\Pengaduans::find($id);
-         $request->validate([
+        $request->validate([
             'id' => 'required',
             'status' => 'required',
-            'cover'=> 'required',
-            'nik'=> 'required',
-            'ketegori'=> 'required',
-            'foto'=> 'required',
-            'id_petugas'=> 'required',
+            'cover' => 'required',
+            'nik' => 'required',
+            'ketegori' => 'required',
+            'foto' => 'required',
+            'id_petugas' => 'required',
         ]);
-            $pengaduan->update([
+        $pengaduan->update([
             'cover' => $request->input('cover'),
             'id' => $request->input('id'),
             'judul' => $request->input('judul'),
@@ -89,11 +93,11 @@ class PetugasPengaduanController extends Controller
             'nik' => $request->input('nik'),
             'status' => $request->input('status'),
             'kategori' => $request->input('ketegori'),
-            'id_petugas' =>$request->input('id_petugas'),
+            'id_petugas' => $request->input('id_petugas'),
             'foto' => $request->input('foto'),
-       ]);
-       // $pengaduan->update($request->all());
-        return redirect ('petugas/pengaduan')->with('success','Data Has Been Saved');
+        ]);
+        // $pengaduan->update($request->all());
+        return redirect('petugas/pengaduan')->with('success', 'Data Has Been Saved');
     }
 
 
@@ -103,9 +107,10 @@ class PetugasPengaduanController extends Controller
      * @param  \App\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function delete ($id){
+    public function delete($id)
+    {
         $pengaduan = \App\Pengaduan::find($id);
         $pengaduan->delete();
-        return back()->with('destroy','Pengaduan Berhasil Di Hapus');
+        return back()->with('destroy', 'Pengaduan Berhasil Di Hapus');
     }
 }

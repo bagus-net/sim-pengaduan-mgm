@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pengaduan;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,9 +22,10 @@ class UserController extends Controller
     }
     public function index()
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $users = User::first()->paginate(10);
-        return view('admin.user.index', compact('users'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('admin.user.index', compact('users', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -33,7 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin/user/create');
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
+        return view('admin/user/create', compact('jmlh_belum'));
     }
 
     /**
@@ -55,7 +58,8 @@ class UserController extends Controller
             'level' => $request['level'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-        ]);return redirect ('admin/user')->with('success','Data Has Been Saved');
+        ]);
+        return redirect('admin/user')->with('success', 'Data Has Been Saved');
     }
 
     /**
@@ -66,7 +70,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin/user/show',compact('user'));
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
+        return view('admin/user/show', compact('user', 'jmlh_belum'));
     }
 
     /**
@@ -77,7 +82,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        
     }
 
     /**
@@ -89,22 +93,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-       $fotoLama = $request->fotoLama;
+        $fotoLama = $request->fotoLama;
+        $foto = $request->file('foto');
+        if (!empty($foto)) {
             $foto = $request->file('foto');
-            if(!empty($foto)){
-                $foto = $request->file('foto');
-                $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
-                $foto->move(public_path('upload/'),$namaBaru);
-            }else{
-                $foto = $fotoLama;
-                $namaBaru = $foto;
-            }
-               User::whereId($user->id)->update([
-                "name"     => $request->name,
-                'email'     => $request->email,
-                "foto"        => $namaBaru,
-                ]);  
-        return redirect ('admin/user')->with('warning','Data Telah di ubah.');
+            $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
+            $foto->move(public_path('upload/'), $namaBaru);
+        } else {
+            $foto = $fotoLama;
+            $namaBaru = $foto;
+        }
+        User::whereId($user->id)->update([
+            "name"     => $request->name,
+            'email'     => $request->email,
+            "foto"        => $namaBaru,
+        ]);
+        return redirect('admin/user')->with('warning', 'Data Telah di ubah.');
     }
 
     /**
@@ -113,54 +117,56 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-     
+
     public function destroy(User $user)
     {
         $user->delete();
         return back()
-                ->with('destroy','1 User Telah Di Hapus.');
+            ->with('destroy', '1 User Telah Di Hapus.');
     }
 
-    public function showing($id){
+    public function showing($id)
+    {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $user = \App\User::find($id);
-        return view('admin.user.profile',compact('user'));  
+        return view('admin.user.profile', compact('user', 'jmlh_belum'));
     }
     public function updatedong(Request $request, User $user)
     {
-       $fotoLama = $request->fotoLama;
+        $fotoLama = $request->fotoLama;
+        $foto = $request->file('foto');
+        if (!empty($foto)) {
             $foto = $request->file('foto');
-            if(!empty($foto)){
-                $foto = $request->file('foto');
-                $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
-                $foto->move(public_path('upload/'),$namaBaru);
-            }else{
-                $foto = $fotoLama;
-                $namaBaru = $foto;
-            }
-               User::whereId($user->id)->update([
-                "name"     => $request->name,
-                'email'     => $request->email,
-                "foto"        => $namaBaru,
-                ]);  
-        return redirect ('admin/masyarakat')->with('warning','Data Telah di ubah.');
+            $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
+            $foto->move(public_path('upload/'), $namaBaru);
+        } else {
+            $foto = $fotoLama;
+            $namaBaru = $foto;
+        }
+        User::whereId($user->id)->update([
+            "name"     => $request->name,
+            'email'     => $request->email,
+            "foto"        => $namaBaru,
+        ]);
+        return redirect('admin/masyarakat')->with('warning', 'Data Telah di ubah.');
     }
-     public function heyupdate(Request $request, User $user)
+    public function heyupdate(Request $request, User $user)
     {
-       $fotoLama = $request->fotoLama;
+        $fotoLama = $request->fotoLama;
+        $foto = $request->file('foto');
+        if (!empty($foto)) {
             $foto = $request->file('foto');
-            if(!empty($foto)){
-                $foto = $request->file('foto');
-                $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
-                $foto->move(public_path('upload/'),$namaBaru);
-            }else{
-                $foto = $fotoLama;
-                $namaBaru = $foto;
-            }
-               User::whereId(auth()->user()->id)->update([
-                "name"     => $request->named,
-                'email'     => $request->email,
-                "foto"        => $namaBaru,
-                ]);  
-        return back()->with('warning','Data Telah di ubah.');
+            $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
+            $foto->move(public_path('upload/'), $namaBaru);
+        } else {
+            $foto = $fotoLama;
+            $namaBaru = $foto;
+        }
+        User::whereId(auth()->user()->id)->update([
+            "name"     => $request->named,
+            'email'     => $request->email,
+            "foto"        => $namaBaru,
+        ]);
+        return back()->with('warning', 'Data Telah di ubah.');
     }
 }

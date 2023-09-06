@@ -6,7 +6,7 @@ use App\Profile;
 use App\User;
 use App\Pengaduan;
 use App\Pengaduans;
-Use Auth;
+use Auth;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,9 +24,10 @@ class ProfileController extends Controller
     }
     public function index()
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduans = Pengaduan::latest()->paginate(5);
         $laporansaya = Pengaduan::all();
-        return view('profile',compact('pengaduans','laporansaya'));
+        return view('profile', compact('pengaduans', 'laporansaya', 'jmlh_belum'));
     }
 
     /**
@@ -82,24 +83,24 @@ class ProfileController extends Controller
     public function update(Request $request, User $profile)
     {
         $fotoLama = $request->fotoLama;
+        $foto = $request->file('foto');
+        if (!empty($foto)) {
             $foto = $request->file('foto');
-            if(!empty($foto)){
-                $foto = $request->file('foto');
-                $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
-                $foto->move(public_path('upload/'),$namaBaru);
-            }else{
-                $foto = $fotoLama;
-                $namaBaru = $foto;
-            }
+            $namaBaru = Carbon::now()->timestamp . '_' . '.' . $foto->getClientOriginalExtension();
+            $foto->move(public_path('upload/'), $namaBaru);
+        } else {
+            $foto = $fotoLama;
+            $namaBaru = $foto;
+        }
 
-               Profile::whereId(auth()->user()->id)->update([
-                "nik"     => $request->nike,
-                "name"     => $request->name,
-                "telp"     => $request->telp,
-                'email'     => $request->email,
-                "foto"        => $namaBaru,
-                ]);  
-       return redirect ('profile')->with('success','Data Has Been Update');
+        Profile::whereId(auth()->user()->id)->update([
+            "nik"     => $request->nike,
+            "name"     => $request->name,
+            "telp"     => $request->telp,
+            'email'     => $request->email,
+            "foto"        => $namaBaru,
+        ]);
+        return redirect('profile')->with('success', 'Data Has Been Update');
     }
 
     /**
@@ -114,9 +115,10 @@ class ProfileController extends Controller
         $pengaduan->delete();
         return back();
     }
-    public function delete ($id){
+    public function delete($id)
+    {
         $pengaduan = \App\Pengaduans::find($id);
         $pengaduan->delete();
-        return back()->with('sukses','Data Berhasil Di Hapus');
+        return back()->with('sukses', 'Data Berhasil Di Hapus');
     }
 }

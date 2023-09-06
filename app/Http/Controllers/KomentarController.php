@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pengaduan;
 use App\Komentar;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,10 @@ class KomentarController extends Controller
     }
     public function index()
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $komentars = Komentar::latest()->paginate(20);
-        return view('admin.komentar.index',compact('komentars'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('admin.komentar.index', compact('komentars', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -88,6 +90,6 @@ class KomentarController extends Controller
     {
         $komentar->delete();
         return back()
-                ->with('destroy','1 Komentar Telah Di Hapus.');
+            ->with('destroy', '1 Komentar Telah Di Hapus.');
     }
 }

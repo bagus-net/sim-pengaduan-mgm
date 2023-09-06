@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pengaduan;
 use App\komentar;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,10 @@ class PetugasKomentarController extends Controller
     }
     public function index()
     {
+        $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $komentars = Komentar::latest()->paginate(20);
-        return view('petugas.komentar.index',compact('komentars'))
-                ->with('i',(request()->input('page', 1) -1) *5);
+        return view('petugas.komentar.index', compact('komentars', 'jmlh_belum'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -84,10 +86,11 @@ class PetugasKomentarController extends Controller
      * @param  \App\komentar  $komentar
      * @return \Illuminate\Http\Response
      */
-    
-    public function delete ($id){
+
+    public function delete($id)
+    {
         $komentar = \App\Komentar::find($id);
         $komentar->delete();
-        return back()->with('destroy','Pengumuman Berhasil Di Hapus');
+        return back()->with('destroy', 'Pengumuman Berhasil Di Hapus');
     }
 }
