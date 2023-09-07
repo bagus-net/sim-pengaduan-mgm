@@ -86,7 +86,7 @@ class TanggapanController extends Controller
             'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
             'nama' => $request->nama,
-            'nik' => $request->nik,
+            'nama_perusahaan' => $request->nama_perusahaan,
             'status' => $request->status,
             'kategori' => $request->kategori,
             'id_petugas' => $request->id_petugas,
