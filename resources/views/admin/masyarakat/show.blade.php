@@ -154,7 +154,7 @@
                                         </div>
                                         <hr>
                                         <div class="card-text text-sm-center">
-                                            <h5 class="text-sm-center mt-2 mb-1 font-weight-bold">{{$user->nik}}</h5>
+                                            <h5 class="text-sm-center mt-2 mb-1 font-weight-bold">{{$user->nama_perusahaan}}</h5>
                                             <h5 class="text-sm-center mt-2 mb-1">{{$user->telp}}</h5>
 
                                         </div>

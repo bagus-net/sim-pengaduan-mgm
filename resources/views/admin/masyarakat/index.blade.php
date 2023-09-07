@@ -46,7 +46,7 @@
                     <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Masyarakat</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Masyarakat</a></li>
+                            <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Customers</a></li>
                         </ul>
                     </li>
                     <li class="menu-title">Laporan</li><!-- /.menu-title -->
@@ -124,7 +124,7 @@
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="#">User</a></li>
-                                    <li class="active">Semua Masyarakat</li>
+                                    <li class="active">Semua Customers</li>
                                 </ol>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                             </td>
                                             <td> <span class="name">{{$user->name}}</span> </td>
                                             <td class="text-lowercase">{{$user->email}} </td>
-                                            <td class="text-center"> <span class="badge badge-warning font-weight-bold">Masyarakat</span> </td>
+                                            <td class="text-center"> <span class="badge badge-warning font-weight-bold">Customers</span> </td>
                                             <td class="text-center"><span>
                                                     <form action="{{route('user.destroy',$user->id)}}" method="POST">
                                                         @csrf

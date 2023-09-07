@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Tanggapan;
 use App\Pengaduan;
-
+use App\Tanggapan;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -20,7 +19,7 @@ class LaporanController extends Controller
     {
         $jmlh_belum = Pengaduan::where('status', 'proses')->orwhere('status', 'verivied')->get()->count();
         $pengaduan = Tanggapan::all();
-        return view('admin/laporan/index', compact('pengaduan', 'jmlh_belum'));
+        return view('admin/laporan/index', compact('pengaduan','Tanggapan', 'jmlh_belum'));
     }
 
     /**

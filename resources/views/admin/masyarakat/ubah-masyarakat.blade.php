@@ -46,7 +46,7 @@
                     <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Masyarakat</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Masyarakat</a></li>
+                            <li><i class="menu-icon fa fa-share"></i><a href="{{url('admin/masyarakat')}}">Semua Customers</a></li>
                         </ul>
                     </li>
                     <li class="menu-title">Laporan</li><!-- /.menu-title -->
@@ -172,7 +172,7 @@
                                         <label for="">NIK</label>
                                         <input type="text" name="nik" disabled="" value="{{$user->nik}}" class="form-control bg-white">
                                     </div> --}}
-                                    <input type="text" name="nik" hidden value="{{$user->nik}}" class="form-control bg-white">
+                                    <input type="text" name="nama_perusahaan" hidden value="{{$user->nama_perusahaan}}" class="form-control bg-white">
                                     <input type="text" name="telp" hidden value="{{$user->telp}}" class="form-control bg-white">
                                     <input type="text" name="password" hidden value="{{$user->password}}" class="form-control bg-white">
                                     <input type="hidden" name="fotoLama" value="{{ $user->foto }}">

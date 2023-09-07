@@ -251,7 +251,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="serial">#</th>
-                                                    <th>NIK</th>
+                                                    <th>Nama Perusahaan</th>
                                                     <th>Name</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -260,7 +260,7 @@
                                                 @foreach ($pengaduan as $item)
                                                 <tr>
                                                     <td class="serial">{{ $loop->index + 1}}</td>
-                                                    <td>{{ $item->nik}}</td>
+                                                    <td>{{ $item->nama_perusahaan}}</td>
                                                     <td> <span class="name">{{ $item->nama}}</span> </td>
                                                     <td>
                                                         <span>{{ $item->status}}</span>

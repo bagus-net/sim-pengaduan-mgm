@@ -173,7 +173,7 @@
                                 @elseif($pengaduan->status == "proses")
                                 <input type="text" name="status" value="selesai" hidden="">
                                 @endif
-                                <input type="text" name="nik" hidden="" value="{{$pengaduan->nik}}">
+                                <input type="text" name="nama_perusahaan" hidden="" value="{{$pengaduan->nama_perusahaan}}">
                                 <input type="text" name="nama" hidden="" value="{{$pengaduan->nama}}">
                                 <input type="text" name="cover" hidden="" value="{{$pengaduan->cover}}">
                                 <input type="text" name="foto" hidden="" value="{{ $pengaduan->foto }}">
