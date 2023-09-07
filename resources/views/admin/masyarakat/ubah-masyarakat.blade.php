@@ -88,7 +88,7 @@
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{route('user.show',auth()->user()->id)}}"><i class="fa fa- user"></i>My Profile</a>
 
-                            <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">{{$jmlh_belum}}</span></a>
+                            {{-- <a class="nav-link" href="{{url('admin/pengaduan')}}"><i class="fa fa- user"></i>Notifications <span class="count">{{$jmlh_belum}}</span></a> --}}
 
                             <a class="nav-link" href="{{route('user.showing',auth()->user()->id)}}"><i class="fa fa -cog"></i>Settings</a>
 
