@@ -96,7 +96,7 @@ class MasyarakatController extends Controller
         }
 
         Profile::whereId($user->id)->update([
-            "nik"     => $request->nike,
+            "nama_perusahaan" => $request->nama_perusahaane,
             "name"     => $request->name,
             "telp"     => $request->telp,
             'email'     => $request->email,

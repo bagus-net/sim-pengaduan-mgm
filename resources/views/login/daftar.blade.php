@@ -41,13 +41,13 @@
 						DAFTAR AKUN
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid nik is required: 16digit">
-						<input class="input100 @error('nik') is-invalid @enderror" type="number" name="nik" placeholder="NIK" required="" value="{{ old('nik') }}" >
+					<div class="wrap-input100 validate-input" data-validate = "Valid nama perusahaan is required">
+						<input class="input100 @error('nama_perusahaan') is-invalid @enderror" type="text" name="nama_perusahaan" placeholder="Nama Perusahaan" required="" value="{{ old('nama_perusahaan') }}" >
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-globe" aria-hidden="true"></i>
 						</span>
-						@error('nik')
+						@error('nama_perusahaan')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

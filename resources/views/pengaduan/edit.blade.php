@@ -161,7 +161,7 @@
                                        <div class="col-lg-6">
                                            <input type="file" name="foto" id="profile-img" value="{{$pengaduan->foto}}" class="form-control"><br>
                                            <input type="text" name="status" value="verified" hidden="">
-                                           <input type="text" name="nik" hidden="" value="{{auth()->user()->nik}}">
+                                           <input type="text" name="nama_perusahaan" hidden="" value="{{auth()->user()->nama_perusahaan}}">
                                            <input type="text" name="nama" hidden="" value="{{auth()->user()->name}}">
                                            <input type="text" name="cover" hidden="" value="{{auth()->user()->foto}}">
                                            <input type="hidden" name="fotoLama" value="{{ $pengaduan->foto }}">

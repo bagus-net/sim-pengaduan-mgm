@@ -20,7 +20,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('/')}}" style="color: #ff5c97;"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About MGM</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -37,7 +37,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('home')}}" style="color: #ff5c97;"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About MGM</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -260,9 +260,9 @@
                           <p class="" style="font-size: 13px">Proses</p>
                           <p class="font-weight-bold" style="font-size: 22px;margin-top: -10%">
                            @foreach($counting as $id)
-                           @if($id->nik == auth()->user()->nik)
+                           @if($id->nama_perusahaan == auth()->user()->nama_perusahaan)
                            @if($id->status == "proses")
-                           {{$id->select('pengaduan')->where('nik', auth()->user()->nik)->where('status', "proses")->count()}}
+                           {{$id->select('pengaduan')->where('nama_perusahaan', auth()->user()->nama_perusahaan)->where('status', "proses")->count()}}
                            @break
                            @endif
                            @endif
@@ -273,9 +273,9 @@
                           <p class="" style="font-size: 13px">Selesai</p>
                           <p class="font-weight-bold" style="font-size: 22px;margin-top: -10%">
                           @foreach($counting as $id)
-                           @if($id->nik == auth()->user()->nik)
+                           @if($id->nama_perusahaan == auth()->user()->nama_perusahaan)
                            @if($id->status == "selesai")
-                           {{$id->select('pengaduan')->where('nik', auth()->user()->nik)->where('status', "selesai")->count()}}
+                           {{$id->select('pengaduan')->where('nama_perusahaan', auth()->user()->nama_perusahaan)->where('status', "selesai")->count()}}
                            @break
                            @endif
                            @endif

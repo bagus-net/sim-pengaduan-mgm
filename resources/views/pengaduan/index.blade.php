@@ -20,7 +20,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('/')}}"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About MGM</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -37,7 +37,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('home')}}"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About MGM</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -169,7 +169,7 @@
                                        <div class="col-lg-6">
                                            <input type="file" name="foto" required="" id="profile-img"  class="form-control"><br>
                                            <input type="text" name="status" value="verified" hidden="">
-                                           <input type="text" name="nik" hidden="" value="{{auth()->user()->nik}}">
+                                           <input type="text" name="nama_perusahaan" hidden="" value="{{auth()->user()->nama_perusahaan}}">
                                            <input type="text" name="nama" hidden="" value="{{auth()->user()->name}}">
                                            <input type="text" name="cover" hidden="" value="{{auth()->user()->foto}}">
 

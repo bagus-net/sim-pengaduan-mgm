@@ -47,7 +47,7 @@ class MasyarakatPengaduanController extends Controller
     {
         $request->validate([
             'cover'    =>  'required',
-            'nik'     =>  'required',
+            'nama_perusahaan' =>  'required',
             'foto'         =>  'required|image|max:2048'
         ]);
 
@@ -59,7 +59,7 @@ class MasyarakatPengaduanController extends Controller
             'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
             'nama' => $request->nama,
-            'nik' => $request->nik,
+            'nama_perusahaan' => $request->nama_perusahaan,
             'status' => $request->status,
             'kategori' => $request->kategori,
             'foto' => $namaFile
@@ -115,7 +115,7 @@ class MasyarakatPengaduanController extends Controller
             'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
             'nama' => $request->nama,
-            'nik' => $request->nik,
+            'nama_perusahaan' => $request->nama_perusahaan,
             'status' => $request->status,
             'kategori' => $request->kategori,
             'foto' => $namaFile

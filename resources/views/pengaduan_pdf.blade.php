@@ -27,14 +27,14 @@ table {
 }
 	</style>
 	<center>
-		<h2>Laporan Pengaduan Masyarakat</h2>
+		<h2>Laporan Pengaduan Customers</h2>
 	</center>
  
 	<table class="table">
 		<thead>
 			<tr>
 				<th>No</th>
-				<th>NIK</th>
+				<th>Nama Perusahaan</th>
 				<th>Nama</th>
 				<th>Judul</th>
 				<th>Kategori</th>
@@ -51,7 +51,7 @@ table {
 			@if($p->status == "proses")
 			<tr>
 				<td>{{++$i}}</td>
-				<td class="" style="font-weight: bold;">{{$p->nik}}</td>
+				<td class="" style="font-weight: bold;">{{$p->nama_perusahaan}}</td>
 				<td>{{$p->nama}}</td>
 				<td>{{$p->judul}}</td>
 				<td>{{$p->kategori}}</td>
@@ -63,7 +63,7 @@ table {
 			@elseif($p->status == "selesai")
 			<tr>
 				<td>{{++$i}}</td>
-				<td style="font-weight: bold;">{{$p->nik}}</td>
+				<td style="font-weight: bold;">{{$p->nama_perusahaan}}</td>
 				<td>{{$p->nama}}</td>
 				<td>{{$p->judul}}</td>
 				<td>{{$p->kategori}}</td>

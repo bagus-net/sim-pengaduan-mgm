@@ -20,7 +20,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('/')}}"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About Pedora</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -37,7 +37,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('home')}}"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About Pedora</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -138,10 +138,10 @@
 
                   <div class="col-md-9">
                      <div class="form-group">
-                      <label for="" style="font-size: 14px">NIK</label>
-                      <input type="text" placeholder="NIK" disabled="" name="" value="{{auth()->user()->nik}}" class="form-control col-md-8 bg-white">
+                      <label for="" style="font-size: 14px">Nama Perusahaan</label>
+                      <input type="text" placeholder="nama perusahaan" disabled="" name="" value="{{auth()->user()->nama_perusahaan}}" class="form-control col-md-8 bg-white">
                     </div>
-                     <input type="text" placeholder="NIK"  name="nike"  value="{{auth()->user()->nik}}" hidden="" class="form-control col-md-8 bg-white">
+                     <input type="text" placeholder="nama perusahaan"  name="nama_perusahaane"  value="{{auth()->user()->nama_perusahaan}}" hidden="" class="form-control col-md-8 bg-white">
                     <div class="form-group">
                       <label for="" style="font-size: 14px">Nama</label>
                       <input type="text" placeholder="nama" name="name" autocomplete="off" value="{{auth()->user()->name}}" class="form-control ">
@@ -190,9 +190,9 @@
                           <p class="" style="font-size: 13px">Proses</p>
                           <p class="font-weight-bold" style="font-size: 22px;margin-top: -10%">
                           @foreach($laporansaya as $id)
-                           @if($id->nik == auth()->user()->nik)
+                           @if($id->nama_perusahaan == auth()->user()->nama_perusahaan)
                            @if($id->status == "proses")
-                           {{$id->select('pengaduan')->where('nik', auth()->user()->nik)->where('status', "proses")->count()}}
+                           {{$id->select('pengaduan')->where('nama_perusahaan', auth()->user()->nama_perusahaan)->where('status', "proses")->count()}}
                            @break
                            @endif
                            @endif
@@ -203,9 +203,9 @@
                           <p class="" style="font-size: 13px">Selesai</p>
                           <p class="font-weight-bold" style="font-size: 22px;margin-top: -10%">
                           @foreach($laporansaya as $id)
-                           @if($id->nik == auth()->user()->nik)
+                           @if($id->nama_perusahaan == auth()->user()->nama_perusahaan)
                            @if($id->status == "selesai")
-                           {{$id->select('pengaduan')->where('nik', auth()->user()->nik)->where('status', "selesai")->count()}}
+                           {{$id->select('pengaduan')->where('nama_perusahaan', auth()->user()->nama_perusahaan)->where('status', "selesai")->count()}}
                            @break
                            @endif
                            @endif
@@ -235,7 +235,7 @@
                 <div class="blog-author">
                   <h4 style="margin-top: 2%">Laporan Saya</h4><br><br>
                 @foreach($pengaduans as $pengaduan)
-                 @if( auth()->user()->nik == $pengaduan->nik )
+                 @if( auth()->user()->nama_perusahaan == $pengaduan->nama_perusahaan )
                  @if($pengaduan->status == "verified")
                   <div class="media align-items-top" style="margin-bottom: 4%">
                      <img src="{{asset('upload/'.$pengaduan->cover)}}" alt="">

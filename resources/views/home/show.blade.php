@@ -20,7 +20,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('/')}}" style="color: #ff5c97;"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About Pedora</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -37,7 +37,7 @@
                                 <nav> 
                                     <ul id="navigation">    
                                         <li><a href="{{url('home')}}" style="color: #ff5c97;"> Home</a></li>
-                                        <li><a href="{{url('about')}}">About Pedora</a></li>
+                                        <li><a href="{{url('about')}}">About Us</a></li>
                                     </ul>
                                 </nav>
                             </div>

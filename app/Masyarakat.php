@@ -11,6 +11,6 @@ class Masyarakat extends Model
 {
 	protected $table = 'users';
     protected $fillable = [
-        'nik','telp','name', 'email', 'password','level','foto'
+        'nama_perusahaan','telp','name', 'email', 'password','level','foto'
     ];
 }
